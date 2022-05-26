@@ -5,12 +5,15 @@ namespace YouRest
     public class RestCaller
     {
         private readonly HttpClient Client = new HttpClient();
-        private readonly Dictionary<HttpMethods, Func<RestRequest_VM, HttpResponseMessage>> MethodList = new Dictionary<HttpMethods, Func<RestRequest_VM, HttpResponseMessage>>();
+        private readonly Dictionary<HttpMethod, Func<RestRequest_VM, HttpResponseMessage>> MethodList = new Dictionary<HttpMethod, Func<RestRequest_VM, HttpResponseMessage>>();
         public RestCaller(RestStaticProperties properties)
         {
             //Fill MethodList
-            MethodList.Add(HttpMethods.Post, Post);
-            MethodList.Add(HttpMethods.Get, Get);
+            MethodList.Add(HttpMethod.Post, Post);
+            MethodList.Add(HttpMethod.Get, Get);
+            MethodList.Add(HttpMethod.Put, Put);
+            MethodList.Add(HttpMethod.Patch, Patch);
+            MethodList.Add(HttpMethod.Delete, Delete);
 
             //Set Connection Time Out
             Client.Timeout = properties.Timeout;
@@ -24,7 +27,6 @@ namespace YouRest
         }
         public RestResponse_VM<T> CallRestService<T>(RestRequest_VM request) where T : class
         {
-
             RestResponse_VM<T> response = new RestResponse_VM<T>();
 
             //Clear headers
@@ -59,7 +61,7 @@ namespace YouRest
             }
 
             //Set Params
-            request.SubAddress = AddParametersToAddress(request.Params, request.SubAddress);
+            request.ReletiveAddress = AddParametersToAddress(request.Params, request.ReletiveAddress);
 
             //Get Response
             HttpResponseMessage? responseMessage = MethodList[request.HttpMethod](request);
@@ -96,14 +98,29 @@ namespace YouRest
         }
         private HttpResponseMessage Get(RestRequest_VM request)
         {
-            return Client.GetAsync(request.SubAddress).Result;
+            return Client.GetAsync(request.ReletiveAddress).Result;
         }
         private HttpResponseMessage Post(RestRequest_VM request)
         {
-            //chose based on Body Class
             HttpContent? content = request.Body.GetContent();
             content.Headers.ContentType = request.Body.GetContentType();
-            return Client.PostAsync(request.SubAddress, content).Result;
+            return Client.PostAsync(request.ReletiveAddress, content).Result;
+        }
+        private HttpResponseMessage Put(RestRequest_VM request)
+        {
+            HttpContent? content = request.Body.GetContent();
+            content.Headers.ContentType = request.Body.GetContentType();
+            return Client.PutAsync(request.ReletiveAddress, content).Result;
+        }
+        private HttpResponseMessage Patch(RestRequest_VM request)
+        {
+            HttpContent? content = request.Body.GetContent();
+            content.Headers.ContentType = request.Body.GetContentType();
+            return Client.PatchAsync(request.ReletiveAddress, content).Result;
+        }
+        private HttpResponseMessage Delete(RestRequest_VM request)
+        {
+            return Client.DeleteAsync(request.ReletiveAddress).Result;
         }
     }
 }
