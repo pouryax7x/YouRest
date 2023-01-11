@@ -25,6 +25,27 @@ namespace YouRest
             Client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
         }
+
+        public RestCaller(RestStaticProperties properties, HttpClient httpClient)
+        {
+            Client = httpClient;
+            //Fill MethodList
+            MethodList.Add(HttpMethod.Post, Post);
+            MethodList.Add(HttpMethod.Get, Get);
+            MethodList.Add(HttpMethod.Put, Put);
+            MethodList.Add(HttpMethod.Patch, Patch);
+            MethodList.Add(HttpMethod.Delete, Delete);
+
+            //Set Connection Time Out
+            Client.Timeout = properties.Timeout;
+
+            //Set Base Address
+            Client.BaseAddress = new Uri(properties.BaseAddress);
+
+            //Add Accept Header
+            Client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+        }
         public RestResponse_VM<T> CallRestService<T>(RestRequest_VM request) where T : class
         {
             RestResponse_VM<T> response = new RestResponse_VM<T>();
