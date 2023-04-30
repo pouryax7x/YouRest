@@ -1,4 +1,7 @@
-﻿namespace YouRest
+﻿using YouRest.Enum;
+using YouRest.Interface;
+
+namespace YouRest
 {
     public class RestRequest_VM
     {

@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System.Net.Http.Headers;
 
-namespace YouRest.BodyClasses
+namespace YouRest.Interface.Body
 {
     public class JsonBody : Body
     {
         public object Content { get; set; }
-        public string JsonContent { get; set; } 
+        public string JsonContent { get; set; }
         public JsonBody(object inputClass)
         {
             Content = inputClass;

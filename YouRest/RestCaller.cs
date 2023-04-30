@@ -1,5 +1,7 @@
 ﻿using System.Net;
 using System.Text.RegularExpressions;
+using YouRest.Authentication;
+using YouRest.Enum;
 
 namespace YouRest
 {

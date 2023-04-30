@@ -5,16 +5,25 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<PackageIcon>445-4451699_additional-services-rest-icon.png</PackageIcon>
+		<PackageIcon>package.jpg</PackageIcon>
 		<PackageTags>RestApi</PackageTags>
 		<AssemblyVersion>2.0.0.0</AssemblyVersion>
 		<FileVersion>2.0.0.0</FileVersion>
 		<Version>2.0.0.0</Version>
-		<ApplicationIcon>yourestIcon.png</ApplicationIcon>
+		<ApplicationIcon>yourestIcon.ico</ApplicationIcon>
+		<Company>Aryoo</Company>
+		<Product>YouRest</Product>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Content Include="yourestIcon.png" />
+	  <Content Include="yourestIcon.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="..\..\..\package.jpg">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	</ItemGroup>
 
 	<ItemGroup>

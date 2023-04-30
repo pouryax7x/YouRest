@@ -1,4 +1,6 @@
-﻿namespace YouRest
+﻿using YouRest.Interface;
+
+namespace YouRest.Authentication
 {
     public class BearerToken : Authorization
     {

@@ -1,6 +1,7 @@
 ﻿using System.Text;
+using YouRest.Interface;
 
-namespace YouRest
+namespace YouRest.Authentication
 {
     public class BasicAuth : Authorization
     {

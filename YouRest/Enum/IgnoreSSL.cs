@@ -1,4 +1,4 @@
-﻿namespace YouRest
+﻿namespace YouRest.Enum
 {
     public enum IgnoreSSL
     {

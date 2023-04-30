@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Headers;
 
-namespace YouRest
+namespace YouRest.Interface
 {
     public interface Body
     {

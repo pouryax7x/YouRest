@@ -1,4 +1,4 @@
-﻿namespace YouRest
+﻿namespace YouRest.Authentication
 {
     public class AuthorizationHeaderDetail
     {
