@@ -2,7 +2,7 @@
 
 namespace YouRest.Interface.Body
 {
-    public class WWWFormBody : Body
+    public class WWWFormBody : IBody
     {
         public List<KeyValuePair<string, string>> Content { get; set; }
         public WWWFormBody(List<KeyValuePair<string, string>> content)

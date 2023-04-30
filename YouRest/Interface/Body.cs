@@ -2,7 +2,7 @@
 
 namespace YouRest.Interface
 {
-    public interface Body
+    public interface IBody
     {
         MediaTypeHeaderValue GetContentType();
         HttpContent GetContent();

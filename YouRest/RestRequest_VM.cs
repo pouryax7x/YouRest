@@ -17,7 +17,7 @@ namespace YouRest
             get => _reletiveAddress;
         }
         public HttpMethod HttpMethod { get; set; }
-        public Body Body { get; set; }
+        public IBody Body { get; set; }
         public List<KeyValuePair<string, string>> Params { get; set; }
         public IgnoreSSL IgnoreSSL { get; set; }
         public bool EnsureSuccessStatusCode { get; set; }

@@ -3,7 +3,7 @@ using System.Net.Http.Headers;
 
 namespace YouRest.Interface.Body
 {
-    public class JsonBody : Body
+    public class JsonBody : IBody
     {
         public object Content { get; set; }
         public string JsonContent { get; set; }
