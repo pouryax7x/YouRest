@@ -6,9 +6,14 @@ namespace YouRest.BodyClasses
     public class JsonBody : Body
     {
         public object Content { get; set; }
+        public string JsonContent { get; set; } 
         public JsonBody(object inputClass)
         {
             Content = inputClass;
+        }
+        public JsonBody(string jsonContent)
+        {
+            JsonContent = jsonContent;
         }
         public MediaTypeHeaderValue GetContentType()
         {
@@ -17,6 +22,10 @@ namespace YouRest.BodyClasses
         }
         public HttpContent GetContent()
         {
+            if (!string.IsNullOrEmpty(JsonContent))
+            {
+                return new StringContent(JsonContent);
+            }
             string? jsonContent = JsonConvert.SerializeObject(Content,
                             Formatting.None,
                             new JsonSerializerSettings

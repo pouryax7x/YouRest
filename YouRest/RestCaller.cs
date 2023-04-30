@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Text.RegularExpressions;
 
 namespace YouRest
 {
@@ -86,14 +87,48 @@ namespace YouRest
 
             //Get Response
             HttpResponseMessage? responseMessage = MethodList[request.HttpMethod](request);
-            responseMessage.EnsureSuccessStatusCode();
+            if (request.EnsureSuccessStatusCode)
+                responseMessage.EnsureSuccessStatusCode();
 
-            response.ApiResponse = responseMessage.Content.ReadAsStringAsync().Result;
+            var res = responseMessage.Content.ReadAsStringAsync().Result;
+
+            res = Unescape(res);
+
+            response.ApiResponse = res;
             response.StatusCode = responseMessage.StatusCode;
             response.IsSuccess = responseMessage.IsSuccessStatusCode;
             response.Headers = responseMessage.Headers;
 
             return response;
+        }
+
+        private static string Unescape(string res)
+        {
+            res = Regex.Replace(res, @"\\([\\/bfnrt]|u[0-9a-fA-F]{4})", m =>
+            {
+                string match = m.Groups[1].Value;
+                switch (match)
+                {
+                    case "\\":
+                        return "\\";
+                    case "/":
+                        return "/";
+                    case "b":
+                        return "\b";
+                    case "f":
+                        return "\f";
+                    case "n":
+                        return "\n";
+                    case "r":
+                        return "\r";
+                    case "t":
+                        return "\t";
+                    default:
+                        int codepoint = int.Parse(match.Substring(1), System.Globalization.NumberStyles.HexNumber);
+                        return char.ConvertFromUtf32(codepoint);
+                }
+            });
+            return res;
         }
 
         private string AddParametersToAddress(List<KeyValuePair<string, string>> @params, string address)
