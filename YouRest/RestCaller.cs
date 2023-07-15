@@ -106,13 +106,13 @@ namespace YouRest
 
         private static string Unescape(string res)
         {
-            res = Regex.Replace(res, @"\\([\\/bfnrt]|u[0-9a-fA-F]{4})", m =>
+            res = Regex.Replace(res, @"\\([\\/bfnrt]u|u[0-9a-fA-F]{4})", m =>
             {
                 string match = m.Groups[1].Value;
                 switch (match)
                 {
-                    case "\\":
-                        return "\\";
+                    case "\\u":
+                        return "\\u";
                     case "/":
                         return "/";
                     case "b":
