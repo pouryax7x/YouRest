@@ -17,8 +17,8 @@ public class JsonBody : IBody
     }
     public MediaTypeHeaderValue GetContentType()
     {
-        // return new MediaTypeHeaderValue("application/json");
-        return GetContent().Headers.ContentType;
+         return new MediaTypeHeaderValue("application/json");
+        //return GetContent().Headers.ContentType;
 
     }
     public HttpContent GetContent()

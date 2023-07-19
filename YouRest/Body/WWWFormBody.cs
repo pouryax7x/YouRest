@@ -11,8 +11,8 @@ public class WWWFormBody : IBody
     }
     public MediaTypeHeaderValue GetContentType()
     {
-        // return new MediaTypeHeaderValue("application/x-www-form-urlencoded");
-        return GetContent().Headers.ContentType;
+        return new MediaTypeHeaderValue("application/x-www-form-urlencoded");
+        //return GetContent().Headers.ContentType;
 
     }
     public HttpContent GetContent()
