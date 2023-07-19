@@ -17,10 +17,13 @@ namespace YouRest
         public string ApiResponse
         {
             set => _apiResponse = value;
+            get => _apiResponse;
         }
         public HttpStatusCode StatusCode { get; set; }
         public HttpHeaders Headers { get; set; }
-        public T? GetResponse() => string.IsNullOrWhiteSpace(_apiResponse) ? default : JsonConvert.DeserializeObject<T>(_apiResponse);
-
+        public T? GetResponse()
+        {
+            return string.IsNullOrWhiteSpace(_apiResponse) ? default : JsonConvert.DeserializeObject<T>(_apiResponse);
+        }
     }
 }
